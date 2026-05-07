@@ -1,0 +1,12 @@
+location = "eastus"
+resource_group_name = "resource.coder.codinginvest.com"
+acr_name = "codinginvest"
+acr_resource_group_name = "resources.codinginvest.com"
+client_image = "codinginvest.azurecr.io/client:latest"
+server_image = "codinginvest.azurecr.io/server:latest"
+custom_domain = "coder.codinginvest.com"
+custom_domain_enabled = false
+subscription_id = "YOUR_AZURE_SUBSCRIPTION_ID"
+tenant_id = "YOUR_AZURE_TENANT_ID"
+client_id = "YOUR_AZURE_CLIENT_ID"
+client_secret = "YOUR_AZURE_CLIENT_SECRET"

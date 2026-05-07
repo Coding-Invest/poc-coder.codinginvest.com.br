@@ -1,0 +1,33 @@
+<div class="chatbot-container">
+  <div class="chatbot-icon" (click)="toggleChat()" [style.display]="isMinimized ? 'block' : 'none'">
+    🤖
+  </div>
+  <div class="chat" [style.display]="isMinimized ? 'none' : 'flex'">
+    <div class="chat-header">
+      <span class="chat-header-caption">🤖 Chat</span>
+      <button class="btn-minimize" (click)="toggleChat()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 489.3 489.3">
+          <path d="M0,12.251v464.7c0,6.8,5.5,12.3,12.3,12.3h224c6.8,0,12.3-5.5,12.3-12.3s-5.5-12.3-12.3-12.3H24.5v-440.2h440.2v210.5c0,6.8,5.5,12.2,12.3,12.2s12.3-5.5,12.3-12.2v-222.7c0-6.8-5.5-12.2-12.3-12.2H12.3C5.5-0.049,0,5.451,0,12.251z"/>
+          <path d="M476.9,489.151c6.8,0,12.3-5.5,12.3-12.3v-170.3c0-6.8-5.5-12.3-12.3-12.3H306.6c-6.8,0-12.3,5.5,12.3,12.3v170.4c0,6.8,5.5,12.3,12.3,12.3h170.3V489.151z M318.8,318.751h145.9v145.9H318.8V318.751z"/>
+          <path d="M135.9,257.651c0,6.8,5.5,12.3,12.3,12.3h109.5c6.8,0,12.3-5.5,12.3-12.3v-109.5c0-6.8-5.5-12.3-12.3-12.3s-12.3,5.5-12.3,12.3v79.9l-138.7-138.7c-4.8-4.8-12.5-4.8-17.3,0c-4.8,4.8-4.8,12.5,0,17.3l138.7,138.7h-79.9C141.4,245.351,135.9,250.851,135.9,257.651z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="chat-body" #chatBody>
+      <div class="chat-body-item" *ngFor="let msg of chatHistory" [ngClass]="{'chat-body-item-user': msg.sender === 'user', 'chat-body-item-ai': msg.sender === 'ai'}" [innerHtml]="msg.text">
+      </div>
+    </div>
+    <div class="chat-prompt">
+      <div class="chat-prompt-message" #messageInput contenteditable="true" (input)="messages = $any($event.target).innerHTML"></div>
+      <button class="chat-prompt-send-button" (click)="sendMessage()" [disabled]="isTyping">
+        <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495.003 495.003">
+          <path d="M164.711,456.687c0,2.966,1.647,5.686,4.266,7.072c2.617,1.385,5.799,1.207,8.245-0.468l55.09-37.616l-67.6-32.22V456.687z"/>
+          <path d="M492.431,32.443c-1.513-1.395-3.466-2.125-5.44-2.125c-1.19,0-2.377,0.264-3.5,0.816L7.905,264.422c-4.861,2.389-7.937,7.353-7.904,12.783c0.033,5.423,3.161,10.353,8.057,12.689l125.342,59.724l250.62-205.99L164.455,364.414l156.145,74.4c1.918,0.919,4.012,1.376,6.084,1.376c1.768,0,3.519-0.322,5.186-0.977c3.637-1.438,6.527-4.318,7.97-7.956L494.436,41.257C495.66,38.188,494.862,34.679,492.431,32.443z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="brand">
+      <a href="https://www.codinginvest.com" target="_blank">codinginvest.com</a>
+    </div>
+  </div>
+</div>

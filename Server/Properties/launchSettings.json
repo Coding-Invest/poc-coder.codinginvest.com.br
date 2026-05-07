@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchBrowser": false,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "environmentVariables": {
+        "ASPNETCORE_HTTP_PORTS": "8080",
+        "ASPNETCORE_HTTPS_PORTS": "8081"
+      },
+      "publishAllPorts": false,
+      "useSSL": false,
+      "httpPort": 8080,
+      "sslPort": 8081    
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json"
+}

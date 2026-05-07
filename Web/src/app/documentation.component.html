@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Documentação do Projeto</title>
+  <link rel="stylesheet" href="./documentation.component.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Análise Detalhada da Solução</h1>
+      <p>Esta documentação descreve uma aplicação de chatbot baseada em arquitetura de microsserviços, utilizando o protocolo MCP (Model Context Protocol) para integração com IA generativa.</p>
+      <p>Este projeto é uma prova de conceito (POC) que foi descontinuado devido a priorizações internas. Ele está sendo tornado público como uma contribuição para a comunidade do GitHub, exatamente como está.</p>
+    </header>
+
+    <section id="poc">
+      <h2>Status do Projeto</h2>
+      <p>Este projeto é uma prova de conceito (POC) que foi descontinuado devido a priorizações internas. Ele está sendo tornado público como uma contribuição para a comunidade do GitHub, exatamente como está.</p>
+      <h3>Known Issues</h3>
+      <ul>
+        <li>Sistema de refresh tokens não finalizado</li>
+        <li>Ferramentas de build de Angular não finalizadas</li>
+        <li>Controle de gasto de tokens não finalizado</li>
+      </ul>
+      <p>Desenvolvedores são incentivados a contribuir com melhorias, correções de bugs e novas funcionalidades.</p>
+    </section>
+
+    <section id="overview">
+      <h2>Visão Geral</h2>
+      <p>A arquitetura segue princípios de separação de responsabilidades, com projetos modulares em .NET 8.0 e Angular 20. A solução é dividida em quatro camadas principais: Web, Client, Server e Domain.</p>
+    </section>
+
+    <section id="web">
+      <h2>Web (Frontend Angular)</h2>
+      <h3>Definições e Conceitos</h3>
+      <p>O projeto Web é uma aplicação Angular standalone, responsável pela interface de usuário (UI) do chatbot. Implementa um componente de chat em tempo real, utilizando Fetch API para comunicação streaming com o backend. O usuário envia prompts via formulário editável, e a resposta da IA é exibida incrementalmente.</p>
+
+      <h3>Padrões Utilizados</h3>
+      <ul>
+        <li><strong>Component-Based Architecture:</strong> Componentes standalone como <code>ChatbotComponent</code> e <code>App</code>.</li>
+        <li><strong>Reactive Programming:</strong> Usando RxJS e signals para reatividade.</li>
+        <li><strong>UI/UX Patterns:</strong> Chat minimizável com histórico dinâmico.</li>
+        <li><strong>Build e Deployment:</strong> Angular CLI para gerar assets em <code>wwwroot/browser</code>.</li>
+      </ul>
+
+      <h3>Estrutura de Código</h3>
+      <ul>
+        <li><code>app.ts:</code> Componente raiz com signal para título.</li>
+        <li><code>chatbot.component.ts:</code> Lógica do chat com métodos como <code>sendMessage()</code>.</li>
+        <li><code>chatbot.component.html:</code> Template com diretivas Angular.</li>
+      </ul>
+    </section>
+
+    <section id="client">
+      <h2>Client (API Gateway e Host Frontend)</h2>
+      <h3>Definições e Conceitos</h3>
+      <p>O projeto Client é uma API ASP.NET Core que serve como gateway entre o frontend Angular e os serviços backend. Hospeda a aplicação Web e expõe endpoints para interação com IA via x.ai API e MCP.</p>
+
+      <h3>Padrões Utilizados</h3>
+      <ul>
+        <li><strong>API Gateway Pattern:</strong> Centraliza requisições e roteia para LLM ou MCP.</li>
+        <li><strong>Mediator Pattern:</strong> <code>ChatbotController</code> coordena interações.</li>
+        <li><strong>Streaming Response:</strong> Server-Sent Events simulados.</li>
+        <li><strong>Dependency Injection:</strong> Registra <code>IHttpClientFactory</code>.</li>
+      </ul>
+
+      <h3>Estrutura de Código</h3>
+      <ul>
+        <li><code>Program.cs:</code> Configuração de Kestrel e serviços.</li>
+        <li><code>Controllers/ChatbotController.cs:</code> Endpoint <code>POST /api/chatbot/send</code>.</li>
+        <li><code>DataTransferObject/Request/:</code> DTOs como <code>Payload</code> e <code>CompletionRequest</code>.</li>
+      </ul>
+    </section>
+
+    <section id="server">
+      <h2>Server (Servidor MCP e Ferramentas)</h2>
+      <h3>Definições e Conceitos</h3>
+      <p>O projeto Server implementa o servidor MCP, fornecendo ferramentas para automação de tarefas como leitura/escrita de arquivos e operações Git via JSON-RPC.</p>
+
+      <h3>Padrões Utilizados</h3>
+      <ul>
+        <li><strong>Command Pattern:</strong> Serviços como <code>FileReadService</code>.</li>
+        <li><strong>Strategy Pattern:</strong> Switch-case no <code>JsonRPCController</code>.</li>
+        <li><strong>JSON-RPC 2.0:</strong> Protocolo para comunicação.</li>
+        <li><strong>Dependency Injection:</strong> Injeção de serviços.</li>
+      </ul>
+
+      <h3>Estrutura de Código</h3>
+      <ul>
+        <li><code>Controllers/JsonRPCController.cs:</code> Roteia métodos para serviços.</li>
+        <li><code>Services/:</code> Implementações como <code>FileListService</code>.</li>
+        <li><code>DataTransferObject/Request/:</code> DTOs para cada ferramenta.</li>
+      </ul>
+    </section>
+
+    <section id="domain">
+      <h2>Domain (Biblioteca Compartilhada)</h2>
+      <h3>Definições e Conceitos</h3>
+      <p>O projeto Domain define entidades compartilhadas como protocolos MCP e instruções para IA.</p>
+
+      <h3>Padrões Utilizados</h3>
+      <ul>
+        <li><strong>Shared Kernel Pattern:</strong> Entidades comuns.</li>
+        <li><strong>Configuration Pattern:</strong> <code>Tools</code> com schemas.</li>
+        <li><strong>Immutable Objects:</strong> Classes como <code>ProtocolRequest</code>.</li>
+      </ul>
+
+      <h3>Estrutura de Código</h3>
+      <ul>
+        <li><code>Tools.cs:</code> Lista de ferramentas e schemas e prompt para IA.</li>
+        <li><code>ProtocolRequest.cs:</code> Estrutura JSON-RPC.</li>
+      </ul>
+    </section>
+
+    <section id="considerations">
+      <h2>Considerações Gerais</h2>
+      <ul>
+        <li><strong>Arquitetura Geral:</strong> Clean Architecture com separação em camadas.</li>
+        <li><strong>Integração:</strong> Projetos referenciam Domain; usa Newtonsoft.Json.</li>
+        <li><strong>Segurança:</strong> CORS temporário, certificados autoassinados.</li>
+        <li><strong>Pontos de Melhoria:</strong> Adicionar testes, logging e validação.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>&copy; 2023 Coding Invest. Para mais informações, visite <a href="https://sistemas.codinginvest.com.br" target="_blank">codinginvest.com.br</a>.</p>
+    </footer>
+  </div>
+</body>
+</html>
